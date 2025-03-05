@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White & Green Website</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: white; /* Default white background */
+        }
+
+        .page {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-content {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-content h1 {
+            color: #4CAF50; /* Green heading */
+        }
+
+        .profile-content p {
+            line-height: 1.6;
+            color: #333; /* Dark gray text */
+        }
+
+        .profile-content img {
+            border-radius: 50%; /* Circular profile picture */
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: #4CAF50;
+            margin-left: 10px;
+            padding: 8px 12px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+        }
+
+        .navigation a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <img src="logo.png" alt="Logo" style="max-width: 300px; max-height: 300px;">
+        <div class="navigation">
+            <a href="#profile">Profile</a>
+        </div>
+    </div>
+
+    <div class="page" id="profile">
+        <div class="profile-content">
+            <img src="profile.jpg" alt="Profile Picture">
+            <h1>Your Name</h1>
+            <p>
+                Welcome to my profile! I am a passionate developer/designer/artist (replace with your actual info). I enjoy creating clean and functional websites and applications.
+            </p>
+            <p>
+                I have experience in [List your skills]. Feel free to contact me for collaborations or inquiries.
+            </p>
+            <p>
+                You can reach me at: your.email@example.com
+            </p>
+        </div>
+        <div class="navigation">
+            <a href="#">Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Optional: Smooth scrolling for the profile link
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileLink = document.querySelector('a[href="#profile"]');
+            if (profileLink) {
+                profileLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector('#profile');
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
