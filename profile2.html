@@ -28,6 +28,7 @@
             max-width: 800px;
             padding: 20px;
             text-align: center;
+            position: relative; /* Needed for absolute positioning of the logo */
         }
 
         .profile-content h1 {
@@ -70,6 +71,16 @@
             margin: auto;
         }
 
+       .top-right-logo {
+            position: absolute;
+            top: 10px; /* Adjust as needed */
+            right: 10px; /* Adjust as needed */
+            max-width: 100px; /* Adjust size as needed */
+            max-height: 100px; /* Adjust size as needed */
+            border-radius: 0; /* Remove circular border */
+            margin-bottom: 0; /* Reset default margin */
+        }
+
     </style>
 </head>
 <body>
@@ -79,13 +90,13 @@
 
     <div class="page" id="profile">
         <div class="profile-content">
-            <img src="logo.png" alt="Logo" style="max-width: 300px; max-height: 300px;">
+            <img src="logo.png" alt="Logo" class="top-right-logo">
             <h1>Andy Vaughan</h1>
             <p>
-                An accomplished and strategically focused technical executive, I offer a demonstrable record of leading and transforming technology functions to achieve significant business impact. 
+                An accomplished and strategically focused technical executive, I offer a demonstrable record of leading and transforming technology functions to achieve significant business impact.
             </p>
             <p>
-                 My expertise encompasses developing and executing technology strategies, fostering innovation, and building high-performing teams across diverse technical domains. I excel at communicating complex technical concepts to both technical and non-technical audiences, driving organisational change, and ensuring alignment between technology initiatives and overarching business objectives within the UK context.
+                My expertise encompasses developing and executing technology strategies, fostering innovation, and building high-performing teams across diverse technical domains. I excel at communicating complex technical concepts to both technical and non-technical audiences, driving organisational change, and ensuring alignment between technology initiatives and overarching business objectives within the UK context.
             </p>
             <p>
                 You can reach me at: <a href="mailto:harehouseconsulting@gmail.com">
