@@ -1,125 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <title>Hare House Consulting</title>
-    <style> 
-      body {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background-color: white; /* Default white background */
-      }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <title>Hare House Consulting</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: white; /* Default white background */
+        }
 
-        .page {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .page {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        .profile-content {
-            width: 80%;
-            max-width: 800px;
-            padding: 20px;
-            text-align: center;
-            position: relative; /* To allow absolute positioning of the logo */
-        }
+        .profile-content {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+        }
 
-        .profile-content h1 {
-            color: #4CAF50; /* Green heading */
-        }
+        .profile-content h1 {
+            color: #4CAF50; /* Green heading */
+        }
 
-        .profile-content p {
-            line-height: 1.6;
-            color: #333; /* Dark gray text */
-        }
+        .profile-content p {
+            line-height: 1.6;
+            color: #333; /* Dark gray text */
+        }
 
-        .profile-content img {
-            border-radius: 50%; /* Circular profile picture */
-            max-width: 200px;
-            margin-bottom: 20px;
-        }
+        .profile-content img {
+            border-radius: 50%; /* Circular profile picture */
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
 
-        .navigation {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
+        .navigation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
 
-        .navigation a {
-            text-decoration: none;
-            color: #4CAF50;
-            margin-left: 10px;
-            padding: 8px 12px;
-            border: 1px solid #4CAF50;
-            border-radius: 5px;
-        }
+        .navigation a {
+            text-decoration: none;
+            color: #4CAF50;
+            margin-left: 10px;
+            padding: 8px 12px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+        }
 
-        .navigation a:hover {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .center-fit {
-            max-width: 100%;
-            max-height: 100vh;
-            margin: auto;
-        }
+        .navigation a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .center-fit {
+            max-width: 100%;
+            max-height: 100vh;
+            margin: auto;
+        }
 
-        .top-right-logo {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            max-width: 100px; /* Adjust size as needed */
-            max-height: 100px; /* Adjust size as needed */
-            border-radius: 0%; /* Remove circular border if desired */
-            margin-bottom: 0; /* Reset any bottom margin */
-        }
-
-    </style>
+    </style>
 </head>
 <body>
-    <div class="page">
-        <img src="logo.png" class="center-fit" alt="Hare House Consulting">
-    </div>
+    <div class="page">
+        <img src="logo.png" class="center-fit" alt="Hare House Consulting">
+    </div>
 
-    <div class="page" id="profile">
-        <div class="profile-content">
-            <img src="logo.png" alt="Logo" class="top-right-logo">
-            <h1>Andy Vaughan</h1>
-            <p>
-                An accomplished and strategically focused technical executive, I offer a demonstrable record of leading and transforming technology functions to achieve significant business impact.
-            </p>
-            <p>
-                 My expertise encompasses developing and executing technology strategies, fostering innovation, and building high-performing teams across diverse technical domains. I excel at communicating complex technical concepts to both technical and non-technical audiences, driving organisational change, and ensuring alignment between technology initiatives and overarching business objectives within the UK context.
-            </p>
-            <p>
-                You can reach me at: <a href="mailto:harehouseconsulting@gmail.com">
-            </p>
-        </div>
-    </div>
+    <div class="page" id="profile">
+        <div class="profile-content">
+            <img src="logo.png" alt="Logo" style="max-width: 300px; max-height: 300px;">
+            <h1>Andy Vaughan</h1>
+            <p>
+                An accomplished and strategically focused technical executive, I offer a demonstrable record of leading and transforming technology functions to achieve significant business impact. 
+            </p>
+            <p>
+                 My expertise encompasses developing and executing technology strategies, fostering innovation, and building high-performing teams across diverse technical domains. I excel at communicating complex technical concepts to both technical and non-technical audiences, driving organisational change, and ensuring alignment between technology initiatives and overarching business objectives within the UK context.
+            </p>
+            <p>
+                You can reach me at: <a href="mailto:harehouseconsulting@gmail.com">
+            </p>
+        </div>
+    </div>
 
-    <script>
-        // Optional: Smooth scrolling for the profile link
-        document.addEventListener('DOMContentLoaded', function() {
-            const profileLink = document.querySelector('a[href="#profile"]');
-            if (profileLink) {
-                profileLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector('#profile');
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                    }
-                });
-            }
-        });
+    <script>
+        // Optional: Smooth scrolling for the profile link
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileLink = document.querySelector('a[href="#profile"]');
+            if (profileLink) {
+                profileLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector('#profile');
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+        });
 
-    </script>
+    </script>
 </body>
 </html>
