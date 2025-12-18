@@ -67,52 +67,61 @@
         </div>
     </section>
 
-    <script>
-        const form = document.getElementById('contact-form');
-        const btn = document.getElementById('submit-btn');
+<script>
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('submit-btn');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-            const hcaptchaResponse = hcaptcha.getResponse();
-            if (!hcaptchaResponse) {
-                alert("Please verify that you are human.");
-                return;
-            }
+        // 1. Get the hCaptcha Token
+        const hcaptchaResponse = hcaptcha.getResponse();
+        if (!hcaptchaResponse) {
+            alert("Please verify that you are human.");
+            return;
+        }
 
-            btn.innerHTML = "Processing...";
-            btn.disabled = true;
+        btn.innerHTML = "Processing...";
+        btn.disabled = true;
 
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            
-            // Explicitly pass the token for verification
-            object["h-captcha-response"] = hcaptchaResponse;
+        // 2. Capture Form Data
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        
+        // 3. CLEANUP: Remove any accidental reCAPTCHA fields that might be injected
+        delete object["g-recaptcha-response"];
+        
+        // 4. Set the correct hCaptcha field for Web3Forms
+        object["h-captcha-response"] = hcaptchaResponse;
 
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(object)
-            })
-            .then(async (res) => {
-                const data = await res.json();
-                if (res.status === 200) {
-                    document.getElementById('form-box').style.display = "none";
-                    document.getElementById('result').style.display = "block";
-                } else {
-                    console.error("Verification Error:", data);
-                    alert("Error: " + data.message);
-                    btn.innerHTML = "Send Message";
-                    btn.disabled = false;
-                    hcaptcha.reset();
-                }
-            })
-            .catch(() => {
-                alert("Network error. Please try again.");
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Accept': 'application/json' 
+            },
+            body: JSON.stringify(object)
+        })
+        .then(async (res) => {
+            const data = await res.json();
+            if (res.status === 200) {
+                document.getElementById('form-box').style.display = "none";
+                document.getElementById('result').style.display = "block";
+            } else {
+                console.error("Verification Error:", data);
+                alert("Error: " + data.message);
                 btn.innerHTML = "Send Message";
                 btn.disabled = false;
-            });
+                hcaptcha.reset();
+            }
+        })
+        .catch(() => {
+            alert("Network error. Please try again.");
+            btn.innerHTML = "Send Message";
+            btn.disabled = false;
         });
-    </script>
+    });
+</script>
 </body>
 </html>
+
