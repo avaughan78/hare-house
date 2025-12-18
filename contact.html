@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hare House Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
+
+        /* Page Layout */
+        section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* Page 1: Logo */
+        #hero {
+            background-color: #ffffff;
+        }
+        .logo {
+            max-width: 300px;
+            width: 80%;
+            transition: transform 0.3s ease;
+        }
+
+        /* Page 2: Contact Form */
+        #contact {
+            background-color: #f9f9f9;
+        }
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 500px;
+        }
+        h2 { margin-bottom: 20px; font-weight: 500; color: #333; }
+        
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #666; }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        textarea { height: 100px; resize: none; }
+        
+        button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        button:hover { background-color: #000; }
+
+        /* Scroll indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            text-decoration: none;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting Logo" class="logo">
+        <a href="#contact" class="scroll-down">Scroll to Contact</a>
+    </section>
+
+    <section id="contact">
+        <div class="form-container">
+            <h2>Request Information</h2>
+            <form action="#" method="POST">
+                <div class="input-group">
+                    <label>Name</label>
+                    <input type="text" name="name" required placeholder="Your Name">
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" required placeholder="email@example.com">
+                </div>
+                <div class="input-group">
+                    <label>Message</label>
+                    <textarea name="message" required placeholder="How can we help?"></textarea>
+                </div>
+                
+                <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
+                
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>
