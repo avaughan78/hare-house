@@ -11,32 +11,81 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; background: #fff; }
-        section { height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px; }
+        
+        section { 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-direction: column; 
+            padding: 20px; 
+        }
+
         #hero { position: relative; }
         .logo { max-width: 300px; width: 80%; }
+
         #contact { background-color: #f9f9f9; }
         .form-container {
-            background: white; padding: 40px; border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            width: 100%; max-width: 500px;
+            background: white; 
+            padding: 40px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            width: 100%; 
+            max-width: 500px;
         }
-        h2 { margin-bottom: 20px; font-weight: 500; color: #333; }
+
+        h2 { margin-bottom: 20px; font-weight: 500; color: #333; text-align: center; }
         .input-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #666; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; }
+        
+        input, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            font-size: 1rem; 
+            font-family: inherit;
+        }
         textarea { height: 100px; resize: none; }
         
-        /* Center the hCaptcha widget */
-        .h-captcha { margin-bottom: 15px; display: flex; justify-content: center; }
+        .h-captcha { 
+            margin: 20px 0; 
+            display: flex; 
+            justify-content: center; 
+        }
 
         button {
-            background-color: #333; color: white; border: none; padding: 14px;
-            border-radius: 4px; cursor: pointer; width: 100%; font-size: 1rem;
+            background-color: #333; 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 1rem;
+            transition: background 0.2s;
         }
         button:hover { background-color: #000; }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
-        #result { display: none; text-align: center; }
-        .scroll-down { position: absolute; bottom: 30px; color: #999; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; }
+
+        #result { display: none; text-align: center; padding: 20px; }
+        #result h3 { color: #27ae60; margin-bottom: 10px; }
+        
+        .scroll-down { 
+            position: absolute; 
+            bottom: 30px; 
+            color: #999; 
+            text-decoration: none; 
+            font-size: 0.8rem; 
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
     </style>
 </head>
 <body>
@@ -52,29 +101,30 @@
                 <h2>Request Information</h2>
                 <form id="contact-form">
                     <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
-                    
+                    <input type="hidden" name="subject" value="New Inquiry from Hare House Website">
+
                     <div class="input-group">
                         <label>Name</label>
-                        <input type="text" name="name" required>
+                        <input type="text" name="name" required placeholder="Your Name">
                     </div>
                     <div class="input-group">
                         <label>Email Address</label>
-                        <input type="email" name="email" required>
+                        <input type="email" name="email" required placeholder="email@example.com">
                     </div>
                     <div class="input-group">
                         <label>Message</label>
-                        <textarea name="message" required></textarea>
+                        <textarea name="message" required placeholder="How can we help?"></textarea>
                     </div>
                     
-                    <div class="h-captcha" data-sitekey="7680038e-9b80-48f6-ab8a-412e33547658"></div>
+                    <div class="h-captcha" data-sitekey="72f69652-993a-42d2-894c-633e97080c70"></div>
                     
                     <button type="submit" id="submit-btn">Submit Request</button>
                 </form>
             </div>
 
             <div id="result">
-                <h3 style="color: green; margin-bottom: 10px;">Message Sent!</h3>
-                <p>Thank you. We will get back to you shortly.</p>
+                <h3>Message Sent!</h3>
+                <p>Thank you for reaching out. A consultant will contact you shortly.</p>
             </div>
         </div>
     </section>
@@ -86,38 +136,48 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // 3. Check if hCaptcha is completed
+            // 1. Capture hCaptcha Response Token
             const hcaptchaResponse = hcaptcha.getResponse();
             if (!hcaptchaResponse) {
-                alert("Please complete the hCaptcha.");
+                alert("Please complete the hCaptcha verification.");
                 return;
             }
 
             btn.innerHTML = "Sending...";
             btn.disabled = true;
 
+            // 2. Format Form Data for Web3Forms
             const formData = new FormData(form);
             const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
+            
+            // 3. Explicitly add the hCaptcha token to the payload
+            object["h-captcha-response"] = hcaptchaResponse;
 
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: json
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Accept': 'application/json' 
+                },
+                body: JSON.stringify(object)
             })
-            .then(res => {
+            .then(async (res) => {
+                const data = await res.json();
                 if (res.ok) {
+                    // Hide form and show success message
                     document.getElementById('form-box').style.display = "none";
                     document.getElementById('result').style.display = "block";
                 } else {
-                    alert("Submission failed. Check your keys.");
+                    // Handle server errors (e.g., 400 Bad Request)
+                    alert("Submission error: " + (data.message || "Please check your dashboard settings."));
                     btn.innerHTML = "Submit Request";
                     btn.disabled = false;
-                    hcaptcha.reset(); // Reset on error
+                    hcaptcha.reset();
                 }
             })
-            .catch(() => {
-                alert("Network error.");
+            .catch(error => {
+                console.error("Submission failed:", error);
+                alert("Network error. Please try again later.");
                 btn.innerHTML = "Submit Request";
                 btn.disabled = false;
             });
