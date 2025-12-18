@@ -10,18 +10,19 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; background: #fff; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; background: #fff; color: #333; }
         section { height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px; }
-        .logo { max-width: 300px; width: 80%; }
+        .logo { max-width: 300px; width: 80%; margin-bottom: 20px; }
         #contact { background-color: #f9f9f9; }
         .form-container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 100%; max-width: 500px; }
-        h2 { margin-bottom: 20px; font-weight: 500; color: #333; text-align: center; }
+        h2 { margin-bottom: 20px; font-weight: 500; text-align: center; }
         .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #666; }
+        label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: #666; font-weight: 500; }
         input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: inherit; }
         textarea { height: 100px; resize: none; }
         .h-captcha { margin: 20px 0; display: flex; justify-content: center; }
-        button { background-color: #333; color: white; border: none; padding: 14px; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1rem; }
+        button { background-color: #1a1a1a; color: white; border: none; padding: 14px; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1rem; font-weight: 500; transition: background 0.2s; }
+        button:hover { background-color: #000; }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
         #result { display: none; text-align: center; padding: 20px; }
         #result h3 { color: #27ae60; margin-bottom: 10px; }
@@ -36,33 +37,32 @@
     <section id="contact">
         <div class="form-container">
             <div id="form-box">
-                <h2>Request Information</h2>
+                <h2>Contact Us</h2>
                 <form id="contact-form">
                     <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
                     
                     <div class="input-group">
                         <label>Name</label>
-                        <input type="text" name="name" required>
+                        <input type="text" name="name" required placeholder="Your Name">
                     </div>
                     <div class="input-group">
                         <label>Email Address</label>
-                        <input type="email" name="email" required>
+                        <input type="email" name="email" required placeholder="email@example.com">
                     </div>
                     <div class="input-group">
                         <label>Message</label>
-                        <textarea name="message" required></textarea>
+                        <textarea name="message" required placeholder="How can we help?"></textarea>
                     </div>
                     
-                    <div class="h-captcha" 
-                         data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
+                    <div class="h-captcha" data-sitekey="72f69652-993a-42d2-894c-633e97080c70"></div>
                     
-                    <button type="submit" id="submit-btn">Submit Request</button>
+                    <button type="submit" id="submit-btn">Send Message</button>
                 </form>
             </div>
 
             <div id="result">
-                <h3>Message Sent!</h3>
-                <p>Thank you for contacting Hare House Consulting.</p>
+                <h3>Success!</h3>
+                <p>Your message has been sent. We'll be in touch shortly.</p>
             </div>
         </div>
     </section>
@@ -76,17 +76,17 @@
 
             const hcaptchaResponse = hcaptcha.getResponse();
             if (!hcaptchaResponse) {
-                alert("Please complete the hCaptcha verification.");
+                alert("Please verify that you are human.");
                 return;
             }
 
-            btn.innerHTML = "Sending...";
+            btn.innerHTML = "Processing...";
             btn.disabled = true;
 
             const formData = new FormData(form);
             const object = Object.fromEntries(formData);
             
-            // Ensure we use the name Web3Forms expects for hCaptcha
+            // Explicitly pass the token for verification
             object["h-captcha-response"] = hcaptchaResponse;
 
             fetch('https://api.web3forms.com/submit', {
@@ -100,16 +100,16 @@
                     document.getElementById('form-box').style.display = "none";
                     document.getElementById('result').style.display = "block";
                 } else {
-                    console.log("Error Details:", data);
+                    console.error("Verification Error:", data);
                     alert("Error: " + data.message);
-                    btn.innerHTML = "Submit Request";
+                    btn.innerHTML = "Send Message";
                     btn.disabled = false;
                     hcaptcha.reset();
                 }
             })
-            .catch(error => {
-                alert("Network error.");
-                btn.innerHTML = "Submit Request";
+            .catch(() => {
+                alert("Network error. Please try again.");
+                btn.innerHTML = "Send Message";
                 btn.disabled = false;
             });
         });
