@@ -32,9 +32,13 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             width: 100%;
             max-width: 500px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        h2 { margin-bottom: 20px; font-weight: 500; color: #333; }
         
+        h2 { margin-bottom: 20px; font-weight: 500; color: #333; }
         .input-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #666; }
         input, textarea {
@@ -60,6 +64,15 @@
             margin-top: 10px;
         }
         button:hover { background-color: #000; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* Success Message Styling */
+        #result {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        #result h3 { color: #2ecc71; margin-bottom: 10px; }
 
         .scroll-down {
             position: absolute;
@@ -87,36 +100,81 @@
 
     <section id="contact">
         <div class="form-container">
-            <h2>Request Information</h2>
-            
-            <form action="https://api.web3forms.com/submit" method="POST">
-                
-                <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
-                
-                <input type="hidden" name="subject" value="New Contact Request - Hare House">
+            <div id="form-box">
+                <h2>Request Information</h2>
+                <form id="contact-form">
+                    <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
+                    <input type="hidden" name="subject" value="New Contact Request - Hare House">
 
-                <div class="input-group">
-                    <label>Name</label>
-                    <input type="text" name="name" required placeholder="Your Name">
-                </div>
-                <div class="input-group">
-                    <label>Email Address</label>
-                    <input type="email" name="email" required placeholder="email@example.com">
-                </div>
-                <div class="input-group">
-                    <label>Message</label>
-                    <textarea name="message" required placeholder="How can we help?"></textarea>
-                </div>
-                
-                <altcha-widget 
-                    challengeurl="https://eu.altcha.org/api/v1/challenge" 
-                    spamfilter="true">
-                </altcha-widget>
-                
-                <button type="submit">Submit Request</button>
-            </form>
+                    <div class="input-group">
+                        <label>Name</label>
+                        <input type="text" name="name" required placeholder="Your Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" required placeholder="email@example.com">
+                    </div>
+                    <div class="input-group">
+                        <label>Message</label>
+                        <textarea name="message" required placeholder="How can we help?"></textarea>
+                    </div>
+                    
+                    <altcha-widget 
+                        name="altcha"
+                        challengeurl="https://eu.altcha.org/api/v1/challenge" 
+                        spamfilter="true">
+                    </altcha-widget>
+                    
+                    <button type="submit" id="submit-btn">Submit Request</button>
+                </form>
+            </div>
+
+            <div id="result">
+                <h3>Message Sent!</h3>
+                <p>Thank you for contacting Hare House Consulting. We will get back to you shortly.</p>
+            </div>
         </div>
     </section>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        const result = document.getElementById('result');
+        const formBox = document.getElementById('form-box');
+        const btn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            btn.innerHTML = "Sending...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                if (response.status == 200) {
+                    formBox.style.display = "none";
+                    result.style.display = "block";
+                } else {
+                    alert("Something went wrong. Please try again.");
+                    btn.innerHTML = "Submit Request";
+                    btn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Form submission failed.");
+            });
+        });
+    </script>
 
 </body>
 </html>
