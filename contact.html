@@ -5,94 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hare House Consulting</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
-    
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; background: #fff; }
-        
-        section { 
-            height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            flex-direction: column; 
-            padding: 20px; 
-        }
-
-        #hero { position: relative; }
+        section { height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px; }
         .logo { max-width: 300px; width: 80%; }
-
         #contact { background-color: #f9f9f9; }
-        .form-container {
-            background: white; 
-            padding: 40px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            width: 100%; 
-            max-width: 500px;
-        }
-
+        .form-container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 100%; max-width: 500px; }
         h2 { margin-bottom: 20px; font-weight: 500; color: #333; text-align: center; }
         .input-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #666; }
-        
-        input, textarea { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid #ddd; 
-            border-radius: 4px; 
-            font-size: 1rem; 
-            font-family: inherit;
-        }
+        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: inherit; }
         textarea { height: 100px; resize: none; }
-        
-        .h-captcha { 
-            margin: 20px 0; 
-            display: flex; 
-            justify-content: center; 
-        }
-
-        button {
-            background-color: #333; 
-            color: white; 
-            border: none; 
-            padding: 14px; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            width: 100%; 
-            font-size: 1rem;
-            transition: background 0.2s;
-        }
-        button:hover { background-color: #000; }
+        .h-captcha { margin: 20px 0; display: flex; justify-content: center; }
+        button { background-color: #333; color: white; border: none; padding: 14px; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1rem; }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
-
         #result { display: none; text-align: center; padding: 20px; }
         #result h3 { color: #27ae60; margin-bottom: 10px; }
-        
-        .scroll-down { 
-            position: absolute; 
-            bottom: 30px; 
-            color: #999; 
-            text-decoration: none; 
-            font-size: 0.8rem; 
-            letter-spacing: 2px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
     </style>
 </head>
 <body>
 
     <section id="hero">
         <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting" class="logo">
-        <a href="#contact" class="scroll-down">SCROLL TO CONTACT ↓</a>
     </section>
 
     <section id="contact">
@@ -101,22 +37,23 @@
                 <h2>Request Information</h2>
                 <form id="contact-form">
                     <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
-                    <input type="hidden" name="subject" value="New Inquiry from Hare House Website">
-
+                    
                     <div class="input-group">
                         <label>Name</label>
-                        <input type="text" name="name" required placeholder="Your Name">
+                        <input type="text" name="name" required>
                     </div>
                     <div class="input-group">
                         <label>Email Address</label>
-                        <input type="email" name="email" required placeholder="email@example.com">
+                        <input type="email" name="email" required>
                     </div>
                     <div class="input-group">
                         <label>Message</label>
-                        <textarea name="message" required placeholder="How can we help?"></textarea>
+                        <textarea name="message" required></textarea>
                     </div>
                     
-                    <div class="h-captcha" data-sitekey="72f69652-993a-42d2-894c-633e97080c70"></div>
+                    <div class="h-captcha" 
+                         data-sitekey="72f69652-993a-42d2-894c-633e97080c70" 
+                         data-captcha="true"></div>
                     
                     <button type="submit" id="submit-btn">Submit Request</button>
                 </form>
@@ -124,7 +61,7 @@
 
             <div id="result">
                 <h3>Message Sent!</h3>
-                <p>Thank you for reaching out. A consultant will contact you shortly.</p>
+                <p>Thank you. We will get back to you shortly.</p>
             </div>
         </div>
     </section>
@@ -136,7 +73,6 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // 1. Capture hCaptcha Response Token
             const hcaptchaResponse = hcaptcha.getResponse();
             if (!hcaptchaResponse) {
                 alert("Please complete the hCaptcha verification.");
@@ -146,38 +82,32 @@
             btn.innerHTML = "Sending...";
             btn.disabled = true;
 
-            // 2. Format Form Data for Web3Forms
             const formData = new FormData(form);
             const object = Object.fromEntries(formData);
             
-            // 3. Explicitly add the hCaptcha token to the payload
+            // Web3Forms expects the token in this specific field
             object["h-captcha-response"] = hcaptchaResponse;
 
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json', 
-                    'Accept': 'application/json' 
-                },
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(object)
             })
             .then(async (res) => {
                 const data = await res.json();
                 if (res.ok) {
-                    // Hide form and show success message
                     document.getElementById('form-box').style.display = "none";
                     document.getElementById('result').style.display = "block";
                 } else {
-                    // Handle server errors (e.g., 400 Bad Request)
-                    alert("Submission error: " + (data.message || "Please check your dashboard settings."));
+                    console.error("Web3Forms Error:", data);
+                    alert("Submission failed: " + (data.message || "Unknown Error"));
                     btn.innerHTML = "Submit Request";
                     btn.disabled = false;
                     hcaptcha.reset();
                 }
             })
             .catch(error => {
-                console.error("Submission failed:", error);
-                alert("Network error. Please try again later.");
+                alert("Network error.");
                 btn.innerHTML = "Submit Request";
                 btn.disabled = false;
             });
