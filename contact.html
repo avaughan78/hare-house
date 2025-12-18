@@ -6,7 +6,7 @@
     <title>Hare House Consulting</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
     
-    <script async defer src="https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist/altcha.min.js" type="module"></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,11 +25,15 @@
         label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #666; }
         input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; }
         textarea { height: 100px; resize: none; }
-        altcha-widget { margin-bottom: 15px; width: 100%; }
+        
+        /* Center the hCaptcha widget */
+        .h-captcha { margin-bottom: 15px; display: flex; justify-content: center; }
+
         button {
             background-color: #333; color: white; border: none; padding: 14px;
             border-radius: 4px; cursor: pointer; width: 100%; font-size: 1rem;
         }
+        button:hover { background-color: #000; }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
         #result { display: none; text-align: center; }
         .scroll-down { position: absolute; bottom: 30px; color: #999; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; }
@@ -62,20 +66,15 @@
                         <textarea name="message" required></textarea>
                     </div>
                     
-                    <altcha-widget 
-                        id="altcha"
-                        challengeurl="https://altcha.org/api/v1/challenge"
-                        debug
-                        hidefooter>
-                    </altcha-widget>
+                    <div class="h-captcha" data-sitekey="7680038e-9b80-48f6-ab8a-412e33547658"></div>
                     
-                    <button type="submit" id="submit-btn" disabled>Submit Request</button>
+                    <button type="submit" id="submit-btn">Submit Request</button>
                 </form>
             </div>
 
             <div id="result">
-                <h3 style="color: green;">Message Sent!</h3>
-                <p>We will get back to you shortly.</p>
+                <h3 style="color: green; margin-bottom: 10px;">Message Sent!</h3>
+                <p>Thank you. We will get back to you shortly.</p>
             </div>
         </div>
     </section>
@@ -83,24 +82,23 @@
     <script>
         const form = document.getElementById('contact-form');
         const btn = document.getElementById('submit-btn');
-        const altcha = document.getElementById('altcha');
-
-        // Listen for verification
-        altcha.addEventListener('statechange', (ev) => {
-            if (ev.detail.state === 'verified') {
-                btn.disabled = false;
-            } else {
-                btn.disabled = true;
-            }
-        });
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // 3. Check if hCaptcha is completed
+            const hcaptchaResponse = hcaptcha.getResponse();
+            if (!hcaptchaResponse) {
+                alert("Please complete the hCaptcha.");
+                return;
+            }
+
             btn.innerHTML = "Sending...";
             btn.disabled = true;
 
             const formData = new FormData(form);
-            const json = JSON.stringify(Object.fromEntries(formData));
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
 
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
@@ -112,9 +110,10 @@
                     document.getElementById('form-box').style.display = "none";
                     document.getElementById('result').style.display = "block";
                 } else {
-                    alert("Submission failed. Please refresh and try again.");
-                    altcha.reset(); // Reset captcha on error
+                    alert("Submission failed. Check your keys.");
                     btn.innerHTML = "Submit Request";
+                    btn.disabled = false;
+                    hcaptcha.reset(); // Reset on error
                 }
             })
             .catch(() => {
