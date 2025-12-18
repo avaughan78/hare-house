@@ -50,7 +50,12 @@
         }
         textarea { height: 100px; resize: none; }
         
-        altcha-widget { --altcha-max-width: 100%; margin-bottom: 15px; }
+        /* Adjusted Altcha size for better stability */
+        altcha-widget { 
+            --altcha-max-width: 100%; 
+            margin-bottom: 15px;
+            display: block;
+        }
         
         button {
             background-color: #333;
@@ -66,12 +71,7 @@
         button:hover { background-color: #000; }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
 
-        /* Success Message Styling */
-        #result {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
+        #result { display: none; text-align: center; padding: 20px; }
         #result h3 { color: #2ecc71; margin-bottom: 10px; }
 
         .scroll-down {
@@ -120,9 +120,11 @@
                     </div>
                     
                     <altcha-widget 
+                        id="altcha"
+                        challengeurl="https://eu.altcha.org/api/v1/challenge"
                         name="altcha"
-                        challengeurl="https://eu.altcha.org/api/v1/challenge" 
-                        spamfilter="true">
+                        hidefooter
+                        hidelogo>
                     </altcha-widget>
                     
                     <button type="submit" id="submit-btn">Submit Request</button>
@@ -144,6 +146,14 @@
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Check if Altcha is verified
+            const altchaResponse = form.querySelector('input[name="altcha"]').value;
+            if (!altchaResponse) {
+                alert("Please complete the verification first.");
+                return;
+            }
+
             btn.innerHTML = "Sending...";
             btn.disabled = true;
 
@@ -164,7 +174,8 @@
                     formBox.style.display = "none";
                     result.style.display = "block";
                 } else {
-                    alert("Something went wrong. Please try again.");
+                    const jsonRes = await response.json();
+                    alert(jsonRes.message || "Something went wrong.");
                     btn.innerHTML = "Submit Request";
                     btn.disabled = false;
                 }
@@ -172,6 +183,8 @@
             .catch(error => {
                 console.log(error);
                 alert("Form submission failed.");
+                btn.innerHTML = "Submit Request";
+                btn.disabled = false;
             });
         });
     </script>
