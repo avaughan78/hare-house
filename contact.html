@@ -5,45 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hare House Consulting</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
-    
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; background: #fff; color: #333; }
-        section { height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 20px; }
-        .logo { max-width: 500px; width: 80%; margin-bottom: 20px; }
-        #contact { background-color: #f9f9f9; }
-        .form-container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 100%; max-width: 500px; }
-        h2 { margin-bottom: 20px; font-weight: 500; text-align: center; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-size: 0.85rem; color: #666; font-weight: 500; }
-        input, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; font-family: inherit; }
-        textarea { height: 100px; resize: none; }
-        .h-captcha { margin: 20px 0; display: flex; justify-content: center; }
-        button { background-color: #1a1a1a; color: white; border: none; padding: 14px; border-radius: 4px; cursor: pointer; width: 100%; font-size: 1rem; font-weight: 500; transition: background 0.2s; }
-        button:hover { background-color: #000; }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
-        #result { display: none; text-align: center; padding: 20px; }
-        #result h3 { color: #27ae60; margin-bottom: 10px; }
+        
+        section { 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-direction: column; 
+            padding: 20px; 
+            position: relative;
+        }
+
+        /* Page 1 */
+        #hero { background-color: #ffffff; }
+        .logo { max-width: 320px; width: 80%; }
+
+        /* Animated Scroll Down Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .scroll-down:hover { color: #333; }
+        .scroll-down::after {
+            content: '↓';
+            margin-top: 8px;
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Page 2 */
+        #contact { background-color: #f8f9fa; }
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 500px;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 { margin-bottom: 24px; font-weight: 500; text-align: center; }
+        .input-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #666; font-weight: 500; }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus { outline: none; border-color: #333; }
+        textarea { height: 110px; resize: none; }
+        
+        .h-captcha { margin: 10px 0 20px 0; display: flex; justify-content: center; }
+
+        button {
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        button:hover { background-color: #000; transform: translateY(-1px); }
+        button:disabled { background-color: #ccc; cursor: not-allowed; transform: none; }
+
+        /* Professional Success State */
+        #result { display: none; text-align: center; animation: fadeIn 0.5s ease-in; }
+        #result .icon { font-size: 3rem; color: #27ae60; margin-bottom: 15px; }
+        #result h3 { font-size: 1.5rem; margin-bottom: 10px; color: #1a1a1a; }
+        #result p { color: #666; line-height: 1.6; margin-bottom: 20px; }
+        .back-link { font-size: 0.9rem; color: #333; text-decoration: underline; cursor: pointer; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
     <section id="hero">
         <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting" class="logo">
+        <a href="#contact" class="scroll-down">Contact Us</a>
     </section>
 
     <section id="contact">
         <div class="form-container">
             <div id="form-box">
-                <h2>Contact Us</h2>
+                <h2>Request Information</h2>
                 <form id="contact-form">
                     <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
                     
                     <div class="input-group">
                         <label>Name</label>
-                        <input type="text" name="name" required placeholder="Your Name">
+                        <input type="text" name="name" required placeholder="Full Name">
                     </div>
                     <div class="input-group">
                         <label>Email Address</label>
@@ -51,80 +134,70 @@
                     </div>
                     <div class="input-group">
                         <label>Message</label>
-                        <textarea name="message" required placeholder="How can we help?"></textarea>
+                        <textarea name="message" required placeholder="How can we help your business?"></textarea>
                     </div>
                     
-                    <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
+                    <div class="h-captcha" data-sitekey="72f69652-993a-42d2-894c-633e97080c70"></div>
                     
                     <button type="submit" id="submit-btn">Send Message</button>
                 </form>
             </div>
 
             <div id="result">
-                <h3>Success!</h3>
-                <p>Your message has been sent. We will be in touch shortly.</p>
+                <div class="icon">✓</div>
+                <h3>Message Sent</h3>
+                <p>Thank you for reaching out. We have received your inquiry and a consultant will respond to you within one business day.</p>
+                <span class="back-link" onclick="window.location.reload()">Send another message</span>
             </div>
         </div>
     </section>
 
-<script>
-    const form = document.getElementById('contact-form');
-    const btn = document.getElementById('submit-btn');
+    <script>
+        const form = document.getElementById('contact-form');
+        const btn = document.getElementById('submit-btn');
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-        // 1. Get the hCaptcha Token
-        const hcaptchaResponse = hcaptcha.getResponse();
-        if (!hcaptchaResponse) {
-            alert("Please verify that you are human.");
-            return;
-        }
+            const hcaptchaResponse = hcaptcha.getResponse();
+            if (!hcaptchaResponse) {
+                alert("Please complete the hCaptcha verification.");
+                return;
+            }
 
-        btn.innerHTML = "Processing...";
-        btn.disabled = true;
+            btn.innerHTML = "Processing...";
+            btn.disabled = true;
 
-        // 2. Capture Form Data
-        const formData = new FormData(form);
-        const object = Object.fromEntries(formData);
-        
-        // 3. CLEANUP: Remove any accidental reCAPTCHA fields that might be injected
-        delete object["g-recaptcha-response"];
-        
-        // 4. Set the correct hCaptcha field for Web3Forms
-        object["h-captcha-response"] = hcaptchaResponse;
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            
+            // Clean accidental recaptcha fields and map h-captcha correctly
+            delete object["g-recaptcha-response"];
+            object["h-captcha-response"] = hcaptchaResponse;
 
-        fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json', 
-                'Accept': 'application/json' 
-            },
-            body: JSON.stringify(object)
-        })
-        .then(async (res) => {
-            const data = await res.json();
-            if (res.status === 200) {
-                document.getElementById('form-box').style.display = "none";
-                document.getElementById('result').style.display = "block";
-            } else {
-                console.error("Verification Error:", data);
-                alert("Error: " + data.message);
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(object)
+            })
+            .then(async (res) => {
+                const data = await res.json();
+                if (res.status === 200) {
+                    document.getElementById('form-box').style.display = "none";
+                    document.getElementById('result').style.display = "block";
+                } else {
+                    alert("Error: " + data.message);
+                    btn.innerHTML = "Send Message";
+                    btn.disabled = false;
+                    hcaptcha.reset();
+                }
+            })
+            .catch(() => {
+                alert("Network error. Please check your connection.");
                 btn.innerHTML = "Send Message";
                 btn.disabled = false;
-                hcaptcha.reset();
-            }
-        })
-        .catch(() => {
-            alert("Network error. Please try again.");
-            btn.innerHTML = "Send Message";
-            btn.disabled = false;
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
-
-
-
-
