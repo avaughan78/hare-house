@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hare House Consulting</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <script async defer src="https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist/altcha.min.js" type="module"></script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; }
@@ -23,10 +25,12 @@
         /* Page 1: Logo */
         #hero {
             background-color: #ffffff;
+            position: relative;
         }
         .logo {
             display: grid;
-            height: 100%;
+            max-height: 60%; /* Prevents logo from hitting screen edges */
+            max-width: 80%;
             transition: transform 0.3s ease;
         }
 
@@ -54,6 +58,12 @@
             font-size: 1rem;
         }
         textarea { height: 100px; resize: none; }
+        
+        /* Altcha Widget Styling */
+        altcha-widget {
+            --altcha-max-width: 100%;
+            margin-bottom: 15px;
+        }
         
         button {
             background-color: #333;
@@ -111,7 +121,10 @@
                     <textarea name="message" required placeholder="How can we help?"></textarea>
                 </div>
                 
-                <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
+                <altcha-widget 
+                    challengeurl="https://eu.altcha.org/api/v1/challenge" 
+                    spamfilter="true">
+                </altcha-widget>
                 
                 <button type="submit">Submit Request</button>
             </form>
