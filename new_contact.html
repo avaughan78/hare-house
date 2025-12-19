@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hare House Consulting | Engineering Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
+    <style>
+        /* Global Reset & Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; 
+            background: #fff; 
+            color: #333; 
+        }
+        
+        section { 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-direction: column; 
+            padding: 60px 20px; 
+            position: relative; /* Necessary for absolute positioned arrows */
+        }
+
+        /* PAGE 1: HERO */
+        #hero { background: #fff; }
+        .logo { max-width: 350px; width: 85%; margin-bottom: 20px; }
+        
+        /* PAGE 2: SERVICES */
+        #services { background-color: #fff; }
+        .content-border {
+            border: 3px solid #4CAF50; /* Hare House Green */
+            border-radius: 24px;       /* Subtly curved corners */
+            padding: 60px 40px;
+            max-width: 850px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .stylised-text h2 {
+            font-weight: 600;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+        }
+        .stylised-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 25px;
+        }
+        .stylised-text p:last-child { margin-bottom: 0; }
+
+        /* PAGE 3: CONTACT */
+        #contact { background-color: #fcfcfc; }
+        .form-container { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06); 
+            width: 100%; 
+            max-width: 500px; 
+            border: 1px solid #eee;
+        }
+        h2.form-title { margin-bottom: 25px; font-weight: 500; text-align: center; font-size: 1.8rem; }
+        
+        /* Form Inputs */
+        .input-group { margin-bottom: 18px; text-align: left; }
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #666; font-weight: 500; }
+        input, textarea { 
+            width: 100%; 
+            padding: 14px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            font-size: 1rem; 
+            font-family: inherit; 
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+        input:focus, textarea:focus { outline: none; border-color: #4CAF50; }
+        textarea { height: 120px; resize: none; }
+        
+        .h-captcha { margin: 25px 0; display: flex; justify-content: center; }
+        
+        button { 
+            background-color: #1a1a1a; 
+            color: white; 
+            border: none; 
+            padding: 18px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 1rem; 
+            font-weight: 600; 
+            transition: all 0.2s; 
+        }
+        button:hover { background-color: #000; transform: translateY(-1px); }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* Animated Scroll Arrows */
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #aaa;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            animation: bounce 2s infinite;
+        }
+        .scroll-hint.green {
+            color: #4CAF50;
+        }
+
+        #result { display: none; text-align: center; padding: 40px 20px; }
+        #result h3 { color: #4CAF50; margin-bottom: 10px; font-size: 1.5rem; }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        @media (max-width: 600px) {
+            .content-border { padding: 40px 20px; }
+            .stylised-text h2 { font-size: 1.6rem; }
+            .stylised-text p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting" class="logo">
+        <a href="#services" class="scroll-hint">Our Services ↓</a>
+    </section>
+
+    <section id="services">
+        <div class="content-border">
+            <div class="stylised-text">
+                <h2>Software Engineering Review</h2>
+                <p>
+                    We provide expert-led technical audits and engineering reviews tailored for high-growth firms and established enterprises. Our mission is to identify hidden technical debt, streamline development lifecycles, and ensure your architecture is built to scale.
+                </p>
+                <p>
+                    From deep-code analysis to assessing engineering culture and workflows, we offer actionable insights that align your technical roadmap with your commercial ambitions. Let us help you build a more resilient, efficient, and innovative engineering organization.
+                </p>
+            </div>
+        </div>
+        <a href="#contact" class="scroll-hint green">Contact Us ↓</a>
+    </section>
+
+    <section id="contact">
+        <div class="form-container">
+            <div id="form-box">
+                <h2 class="form-title">Get In Touch</h2>
+                <form id="contact-form">
+                    <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
+                    
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" required placeholder="john@company.com">
+                    </div>
+                    <div class="input-group">
+                        <label>How can we help?</label>
+                        <textarea name="message" required placeholder="Tell us about your project..."></textarea>
+                    </div>
+                    
+                    <div class="h-captcha" data-sitekey="72f69652-993a-42d2-894c-633e97080c70"></div>
+                    
+                    <button type="submit" id="submit-btn">Send Message</button>
+                </form>
+            </div>
+
+            <div id="result">
+                <h3>Message Sent</h3>
+                <p>Thank you for reaching out. We will get back to you shortly.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        const btn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const hcaptchaResponse = hcaptcha.getResponse();
+            if (!hcaptchaResponse) {
+                alert("Please complete the hCaptcha.");
+                return;
+            }
+
+            btn.innerHTML = "Sending...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            object["h-captcha-response"] = hcaptchaResponse;
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(object)
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
+                    document.getElementById('form-box').style.display = "none";
+                    document.getElementById('result').style.display = "block";
+                } else {
+                    const data = await res.json();
+                    alert("Error: " + data.message);
+                    btn.innerHTML = "Send Message";
+                    btn.disabled = false;
+                    hcaptcha.reset();
+                }
+            })
+            .catch(() => {
+                alert("Something went wrong. Please try again.");
+                btn.innerHTML = "Send Message";
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
