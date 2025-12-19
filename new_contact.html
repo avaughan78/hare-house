@@ -38,11 +38,11 @@
             position: relative; 
         }
 
-        /* --- PAGE 1: HERO (RE-CENTRALISED FOR LAPTOP) --- */
+        /* --- PAGE 1: HERO --- */
         #hero {
             display: flex;
-            justify-content: center; /* Centralises vertically on laptop */
-            align-items: center;     /* Centralises horizontally */
+            justify-content: center; 
+            align-items: center;     
             text-align: center;
         }
 
@@ -50,32 +50,33 @@
             max-width: 700px; 
             width: 90%; 
             height: auto;
-            /* Subtly offset the logo up slightly so it feels optically centered 
-               even with the arrow at the bottom */
             margin-top: -5vh; 
         }
         
-        /* --- PAGE 2: SERVICES --- */
+        /* --- PAGE 2: SERVICES (Proportionally Smaller) --- */
+        #services { background-color: #fff; }
         .content-border {
             border: 3px solid var(--brand-green);
             border-radius: 24px;
-            padding: 60px 40px;
-            max-width: 850px;
+            padding: 50px 35px;
+            max-width: 800px;
             width: 100%;
             text-align: center;
         }
         .stylised-text h2 {
             font-weight: 600;
-            font-size: 2.0rem;
-            margin-bottom: 30px;
+            font-size: 1.8rem; /* Proportionally smaller from 2.2rem */
+            margin-bottom: 25px;
             letter-spacing: -0.5px;
+            color: var(--text-main);
         }
         .stylised-text p {
-            font-size: 1.0rem;
-            line-height: 1.8;
+            font-size: 1.1rem; /* Proportionally smaller from 1.2rem */
+            line-height: 1.7;
             color: var(--text-sub);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
+        .stylised-text p:last-child { margin-bottom: 0; }
 
         /* --- PAGE 3: CONTACT --- */
         #contact { background-color: var(--bg-light); }
@@ -144,13 +145,22 @@
         /* --- MOBILE SPECIFIC OVERRIDES --- */
         @media (max-width: 600px) {
             #hero { 
-                justify-content: flex-start; /* Move up on mobile */
+                justify-content: flex-start; 
                 padding-top: 25vh; 
             }
-            .logo { margin-top: 0; } /* Reset laptop offset */
+            .logo { margin-top: 0; } 
             .scroll-hint { bottom: 20px; } 
+
+            /* Mobile Font Adjustments */
+            .stylised-text h2 { 
+                font-size: 1.5rem; 
+                margin-bottom: 20px;
+            }
+            .stylised-text p {
+                font-size: 1.0rem; 
+                line-height: 1.6;
+            }
             .content-border { padding: 40px 20px; }
-            .stylised-text h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -182,14 +192,17 @@
                 <h2 class="form-title">Get In Touch</h2>
                 <form id="contact-form">
                     <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
+                    
                     <div class="input-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" required placeholder="John Doe">
                     </div>
+                    
                     <div class="input-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" required placeholder="john@company.com">
                     </div>
+
                     <div class="input-group">
                         <label for="subject">Reason for Contact</label>
                         <select id="subject" name="subject">
@@ -199,24 +212,29 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
+
                     <div class="input-group">
                         <label for="message">How can we help?</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
+
                     <div class="h-captcha" data-sitekey="72f69652-993a-42d2-894c-633e97080c70"></div>
                     <button type="submit" id="submit-btn">Send Message</button>
                 </form>
             </div>
+            
             <div id="result">
                 <h3 style="color: var(--brand-green); margin-bottom: 15px;">Message Sent</h3>
                 <p>Thank you for reaching out. We will get back to you shortly.</p>
                 <button class="reset-btn" style="margin-top: 25px;" onclick="resetForm()">Send Another Message</button>
             </div>
         </div>
+        
         <a href="#hero" class="nav-link back-to-top js-scroll">↑ Back to Top</a>
     </section>
 
     <script>
+        // Smooth Scroll Logic
         document.querySelectorAll('.js-scroll').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -225,6 +243,7 @@
             });
         });
 
+        // Form Logic
         const form = document.getElementById('contact-form');
         const btn = document.getElementById('submit-btn');
 
