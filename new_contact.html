@@ -28,7 +28,8 @@
         }
         
         section { 
-            min-height: 100vh; 
+            min-height: 100vh; /* Standard fallback */
+            min-height: 100dvh; /* Dynamic viewport height for 2025 browsers */
             display: flex; 
             justify-content: center; 
             align-items: center; 
@@ -37,12 +38,12 @@
             position: relative; 
         }
 
-        /* --- PAGE 1: HERO (Adjusted for Mobile Visibility) --- */
+        /* --- PAGE 1: HERO --- */
         #hero {
             display: flex;
-            justify-content: flex-start; /* Move content toward the top */
+            justify-content: flex-start; 
             align-items: center;
-            padding-top: 15vh; /* Shifts the logo up by roughly 15% of the screen height */
+            padding-top: 20vh; /* Lifted logo */
         }
 
         .logo { 
@@ -98,13 +99,14 @@
             cursor: pointer;
             text-align: center;
             white-space: nowrap;
-            padding: 10px;
+            padding: 15px; /* Larger hit area */
             transition: opacity 0.3s;
         }
 
-        .scroll-hint { bottom: 40px; color: #aaa; animation: bounce 2s infinite; }
+        /* Adjusted bottom position to stay above mobile browser bars */
+        .scroll-hint { bottom: 60px; color: #aaa; animation: bounce 2s infinite; }
         .scroll-hint.brand { color: var(--brand-green); }
-        .back-to-top { bottom: 30px; color: var(--brand-green); }
+        .back-to-top { bottom: 40px; color: var(--brand-green); }
 
         .nav-link:hover { opacity: 0.7; }
 
@@ -138,7 +140,8 @@
         #result { display: none; text-align: center; padding: 40px 20px; }
 
         @media (max-width: 600px) {
-            #hero { padding-top: 20vh; } /* Slightly more lift on very small phones */
+            #hero { padding-top: 25vh; } 
+            .scroll-hint { bottom: 80px; } /* Even higher on mobile to ensure visibility */
             .content-border { padding: 40px 20px; }
             .stylised-text h2 { font-size: 1.8rem; }
             .logo { max-width: 85%; }
@@ -215,7 +218,7 @@
     </section>
 
     <script>
-        // Smooth Scroll
+        // Smooth Scroll Logic
         document.querySelectorAll('.js-scroll').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -224,7 +227,7 @@
             });
         });
 
-        // Form Submission
+        // Form Submission Logic
         const form = document.getElementById('contact-form');
         const btn = document.getElementById('submit-btn');
 
