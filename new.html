@@ -15,38 +15,40 @@
 
     <section id="intro">
         <div class="content-border">
-            <h2>Software Engineering Review</h2>
-            <p>We provide expert-led technical audits and engineering reviews tailored for high-growth firms and established enterprises. Our mission is to identify hidden technical debt, streamline development lifecycles, and ensure your architecture is built to scale.</p>
-            <p>From deep-code analysis to assessing engineering culture and workflows, we offer actionable insights that align your technical roadmap with your commercial ambitions.</p>
+            <div class="stylised-text">
+                <h2>Software Engineering Review</h2>
+                <p>We provide expert-led technical audits and engineering reviews tailored for high-growth firms and established enterprises. Our mission is to identify hidden technical debt, streamline development lifecycles, and ensure your architecture is built to scale.</p>
+                <p>From deep-code analysis to assessing engineering culture and workflows, we offer actionable insights that align your technical roadmap with your commercial ambitions.</p>
+            </div>
         </div>
-        <a href="#audits" class="nav-link scroll-hint">Audit Suites ↓</a>
+        <a href="#audits" class="nav-link scroll-hint brand">Audit Suites ↓</a>
     </section>
 
     <section id="audits">
-        <h2 style="margin-bottom: 40px; font-size: 2rem;">Audit Suites</h2>
+        <h2 class="section-title">Diagnostic Audit Suites</h2>
         <div class="audit-grid">
             <div class="audit-card">
                 <h3>Engineering Velocity</h3>
-                <p>We identify why delivery slows as headcount grows, focusing on communication silos and CI/CD bottlenecks.</p>
+                <p>Analysis of "Growth Friction." We investigate why delivery slows as headcount grows, focusing on communication and CI/CD bottlenecks.</p>
             </div>
             <div class="audit-card">
                 <h3>Architectural Integrity</h3>
-                <p>Clinical debt assessment. We identify structural risks in your foundation before they impact your growth targets.</p>
+                <p>Clinical debt assessment. We identify structural risks in your foundation before they impact your 12-month growth targets.</p>
             </div>
             <div class="audit-card">
                 <h3>Investment Due Diligence</h3>
-                <p>Independent risk assessment for investors. We provide the "Outside View" on code quality and security.</p>
+                <p>Independent risk assessment for M&A and Private Equity. We provide the "Outside View" on code quality and security.</p>
             </div>
         </div>
-        <a href="#contact" class="nav-link scroll-hint">Contact Us ↓</a>
+        <a href="#methodology" class="nav-link scroll-hint brand">Our Methodology ↓</a>
     </section>
 
     <section id="methodology">
         <div class="methodology-container">
             <h2 class="section-title">The 14-Day Diagnostic</h2>
-            <p class="section-intro">Our audit process is surgical, objective, and designed to provide maximum insight with minimal disruption to your engineering cycles.</p>
+            <p class="section-intro">Our process is surgical, objective, and designed to provide maximum insight with minimal disruption to your engineering cycles.</p>
             
-            
+            [Image of a software engineering audit workflow diagram showing stages: Discovery, Technical Analysis, Organizational Review, and Strategic Delivery]
 
             <div class="methodology-grid">
                 <div class="method-step">
@@ -76,21 +78,48 @@
 
     <section id="contact">
         <div class="form-container">
-            <h2 style="text-align: center; margin-bottom: 25px;">Get In Touch</h2>
+            <h2 class="form-title">Get In Touch</h2>
             <form id="contact-form">
-                <input type="text" placeholder="Full Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <select>
-                    <option>Engineering Review</option>
-                    <option>Technical Audit</option>
-                    <option>Scaling Strategy</option>
-                </select>
-                <textarea rows="4" placeholder="How can we help?"></textarea>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="john@company.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Reason for Contact</label>
+                    <select>
+                        <option>Engineering Review</option>
+                        <option>Technical Audit</option>
+                        <option>Scaling Strategy</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>How can we help?</label>
+                    <textarea placeholder="Describe your current technical challenges..."></textarea>
+                </div>
                 <button type="submit">Send Message</button>
             </form>
+        </div>
+        
+        <div class="site-footer">
+            <span class="footer-legal">Hare House Consulting Ltd • No. 15830381</span>
+            <a href="#" class="footer-link">Privacy Policy</a>
         </div>
         <a href="#hero" class="nav-link back-to-top">↑ Back to Top</a>
     </section>
 
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
