@@ -2,206 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hare House Consulting</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; overflow-x: hidden; background: #fff; color: #333; }
-        
-        section { 
-            height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            flex-direction: column; 
-            padding: 20px; 
-            position: relative;
-        }
-
-        /* Page 1 */
-        #hero { background-color: #ffffff; }
-        .logo { max-width: 500px; width: 80%; }
-
-        /* Animated Scroll Down Indicator */
-        .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #bbb;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .scroll-down:hover { color: #333; }
-        .scroll-down::after {
-            content: '↓';
-            margin-top: 8px;
-            font-size: 1.2rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        /* Page 2 */
-        #contact { background-color: #f8f9fa; }
-        .form-container {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 500px;
-            min-height: 480px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        h2 { margin-bottom: 24px; font-weight: 500; text-align: center; }
-        .input-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #666; font-weight: 500; }
-        
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #e1e1e1;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-        input:focus, textarea:focus { outline: none; border-color: #333; }
-        textarea { height: 110px; resize: none; }
-        
-        .h-captcha { margin: 10px 0 20px 0; display: flex; justify-content: center; }
-
-        button {
-            background-color: #1a1a1a;
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        button:hover { background-color: #000; transform: translateY(-1px); }
-        button:disabled { background-color: #ccc; cursor: not-allowed; transform: none; }
-
-        /* Professional Success State */
-        #result { display: none; text-align: center; animation: fadeIn 0.5s ease-in; }
-        #result .icon { font-size: 3rem; color: #27ae60; margin-bottom: 15px; }
-        #result h3 { font-size: 1.5rem; margin-bottom: 10px; color: #1a1a1a; }
-        #result p { color: #666; line-height: 1.6; margin-bottom: 20px; }
-        .back-link { font-size: 0.9rem; color: #333; text-decoration: underline; cursor: pointer; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
+    <title>Book a Diagnostic | Hare House Consulting</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-    <section id="hero">
-        <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting" class="logo">
-        <a href="#contact" class="scroll-down">Contact Us</a>
-    </section>
-
-    <section id="contact">
-        <div class="form-container">
-            <div id="form-box">
-                <h2>Request Information</h2>
-                <form id="contact-form">
-                    <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
-                    
-                    <div class="input-group">
-                        <label>Name</label>
-                        <input type="text" name="name" required placeholder="Full Name">
-                    </div>
-                    <div class="input-group">
-                        <label>Email Address</label>
-                        <input type="email" name="email" required placeholder="email@example.com">
-                    </div>
-                    <div class="input-group">
-                        <label>Message</label>
-                        <textarea name="message" required placeholder="How can we help you?"></textarea>
-                    </div>
-                    
-                    <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
-                    
-                    <button type="submit" id="submit-btn">Send Message</button>
-                </form>
+<body class="bg-light">
+    <div class="container" style="max-width: 600px; padding-top: 100px;">
+        <h2>Schedule your Engineering Diagnostic</h2>
+        <p>Please provide some context so we can make our intro call as productive as possible.</p>
+        
+        <form action="#" class="contact-form">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" required>
             </div>
-
-            <div id="result">
-                <div class="icon">✓</div>
-                <h3>Message Sent</h3>
-                <p>Thank you for reaching out. We have received your enquiry and a consultant will respond to you within one business day.</p>
-                <span class="back-link" onclick="window.location.reload()">Send another message</span>
+            <div class="form-group">
+                <label>Engineering Team Size</label>
+                <select>
+                    <option>10 - 25</option>
+                    <option>25 - 100</option>
+                    <option>100+</option>
+                </select>
             </div>
-        </div>
-    </section>
-
-    <script>
-        const form = document.getElementById('contact-form');
-        const btn = document.getElementById('submit-btn');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const hcaptchaResponse = hcaptcha.getResponse();
-            if (!hcaptchaResponse) {
-                alert("Please complete the hCaptcha verification.");
-                return;
-            }
-
-            btn.innerHTML = "Processing...";
-            btn.disabled = true;
-
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            
-            // Clean accidental recaptcha fields and map h-captcha correctly
-            delete object["g-recaptcha-response"];
-            object["h-captcha-response"] = hcaptchaResponse;
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(object)
-            })
-            .then(async (res) => {
-                const data = await res.json();
-                if (res.status === 200) {
-                    document.getElementById('form-box').style.display = "none";
-                    document.getElementById('result').style.display = "block";
-                } else {
-                    alert("Error: " + data.message);
-                    btn.innerHTML = "Send Message";
-                    btn.disabled = false;
-                    hcaptcha.reset();
-                }
-            })
-            .catch(() => {
-                alert("Network error. Please check your connection.");
-                btn.innerHTML = "Send Message";
-                btn.disabled = false;
-            });
-        });
-    </script>
+            <div class="form-group">
+                <label>Primary Challenge</label>
+                <select>
+                    <option>Velocity / Roadmap Delays</option>
+                    <option>Technical Debt / Scaling Issues</option>
+                    <option>M&A Due Diligence</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Briefly describe the "Black Box" issue you're facing</label>
+                <textarea rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn primary" style="width: 100%; cursor: pointer;">Request Intro Call</button>
+        </form>
+        <p style="text-align: center; margin-top: 20px;"><a href="index.html">&larr; Back to Home</a></p>
+    </div>
 </body>
 </html>
-
-
-
-
