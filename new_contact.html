@@ -34,14 +34,15 @@
             align-items: center; 
             flex-direction: column; 
             padding: 60px 20px; 
-            position: relative; /* Crucial for absolute positioning of hints */
+            position: relative; 
         }
 
-        /* --- PAGE 1: HERO --- */
+        /* --- PAGE 1: HERO (Adjusted for Mobile Visibility) --- */
         #hero {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* Move content toward the top */
             align-items: center;
+            padding-top: 15vh; /* Shifts the logo up by roughly 15% of the screen height */
         }
 
         .logo { 
@@ -137,9 +138,10 @@
         #result { display: none; text-align: center; padding: 40px 20px; }
 
         @media (max-width: 600px) {
+            #hero { padding-top: 20vh; } /* Slightly more lift on very small phones */
             .content-border { padding: 40px 20px; }
             .stylised-text h2 { font-size: 1.8rem; }
-            .logo { max-width: 90%; }
+            .logo { max-width: 85%; }
         }
     </style>
 </head>
