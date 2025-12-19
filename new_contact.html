@@ -34,20 +34,23 @@
         }
 
         /* PAGE 1: HERO */
-        #hero { background: #fff; }
+        #hero { 
+            background: #fff;
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+        }
         
-        /* DOUBLED LOGO SIZE: Increased from 350px to 700px */
         .logo { 
             max-width: 700px; 
             width: 90%; 
             height: auto;
-            margin-bottom: 40px; 
         }
         
         /* PAGE 2: SERVICES */
         #services { background-color: #fff; }
         .content-border {
-            border: 3px solid #4CAF50; /* Hare House Green */
+            border: 3px solid #0D2E27; /* Dark Green Border */
             border-radius: 24px;
             padding: 60px 40px;
             max-width: 850px;
@@ -77,39 +80,57 @@
             width: 100%; 
             max-width: 500px; 
             border: 1px solid #eee;
+            min-height: 450px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
-        /* Animated Scroll Arrows & Back to Top */
+        /* Navigation Elements */
         .scroll-hint, .back-to-top {
             position: absolute;
-            bottom: 40px;
             font-size: 0.75rem;
             letter-spacing: 2px;
             text-decoration: none;
             text-transform: uppercase;
             font-weight: 600;
             cursor: pointer;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        .scroll-hint { color: #aaa; animation: bounce 2s infinite; }
-        .scroll-hint.green { color: #4CAF50; }
+        .scroll-hint { bottom: 40px; color: #aaa; animation: bounce 2s infinite; }
+        .scroll-hint.brand-color { color: #0D2E27; }
         
         .back-to-top {
-            color: #4CAF50;
+            color: #0D2E27;
             bottom: 30px;
             transition: opacity 0.3s;
         }
         .back-to-top:hover { opacity: 0.7; }
 
-        /* Form Styles */
+        /* Form & Button Styles */
         h2.form-title { margin-bottom: 25px; text-align: center; font-size: 1.8rem; }
         .input-group { margin-bottom: 18px; text-align: left; }
         label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #666; }
         input, textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
         textarea { height: 120px; resize: none; }
-        button { 
-            background-color: #1a1a1a; color: white; border: none; padding: 18px; 
-            border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; 
+        
+        /* Button using the new Dark Green */
+        button, .reset-btn { 
+            background-color: #0D2E27; 
+            color: white; 
+            border: none; 
+            padding: 18px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-weight: 600; 
+            transition: filter 0.2s, transform 0.1s;
         }
+        button:hover, .reset-btn:hover { filter: brightness(1.2); }
+        button:active { transform: scale(0.98); }
+        
+        .reset-btn { margin-top: 20px; text-decoration: none; display: inline-block; text-align: center; }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
@@ -122,7 +143,7 @@
         @media (max-width: 600px) {
             .content-border { padding: 40px 20px; }
             .stylised-text h2 { font-size: 1.8rem; }
-            .logo { max-width: 90%; } /* Ensures large logo fits on phones */
+            .logo { max-width: 90%; }
         }
     </style>
 </head>
@@ -145,7 +166,7 @@
                 </p>
             </div>
         </div>
-        <a href="#contact" class="scroll-hint green js-scroll">Contact Us ↓</a>
+        <a href="#contact" class="scroll-hint brand-color js-scroll">Contact Us ↓</a>
     </section>
 
     <section id="contact">
@@ -170,9 +191,11 @@
                     <button type="submit" id="submit-btn">Send Message</button>
                 </form>
             </div>
+            
             <div id="result">
-                <h3 style="color: #4CAF50;">Message Sent</h3>
+                <h3 style="color: #0D2E27;">Message Sent</h3>
                 <p>Thank you for reaching out. We will get back to you shortly.</p>
+                <button class="reset-btn" onclick="resetForm()">Send Another Message</button>
             </div>
         </div>
         
@@ -180,62 +203,18 @@
     </section>
 
     <script>
-        // Enhanced Smooth Scroll Logic
+        // Smooth Scroll Logic
         document.querySelectorAll('.js-scroll').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
 
         // Form Submission Logic
         const form = document.getElementById('contact-form');
-        const btn = document.getElementById('submit-btn');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const hcaptchaResponse = hcaptcha.getResponse();
-            if (!hcaptchaResponse) {
-                alert("Please complete the hCaptcha.");
-                return;
-            }
-
-            btn.innerHTML = "Sending...";
-            btn.disabled = true;
-
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            object["h-captcha-response"] = hcaptchaResponse;
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(object)
-            })
-            .then(async (res) => {
-                if (res.status === 200) {
-                    document.getElementById('form-box').style.display = "none";
-                    document.getElementById('result').style.display = "block";
-                } else {
-                    const data = await res.json();
-                    alert("Error: " + data.message);
-                    btn.innerHTML = "Send Message";
-                    btn.disabled = false;
-                    hcaptcha.reset();
-                }
-            })
-            .catch(() => {
-                alert("Something went wrong. Please try again.");
-                btn.innerHTML = "Send Message";
-                btn.disabled = false;
-            });
-        });
-    </script>
-</body>
-</html>
+        const btn = document.getElementById('submit
