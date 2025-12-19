@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hare House Consulting | Engineering Review</title>
+    <title>Hare House Consulting | Software Engineering Review</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
@@ -50,10 +50,11 @@
             max-width: 700px; 
             width: 90%; 
             height: auto;
-            margin-top: -5vh; /* Optical centering for laptop */
+            margin-top: -5vh; /* Optical centering for desktop */
         }
         
         /* --- PAGE 2: SERVICES --- */
+        #services { background-color: #fff; }
         .content-border {
             border: 3px solid var(--brand-green);
             border-radius: 24px;
@@ -67,6 +68,7 @@
             font-size: 1.8rem;
             margin-bottom: 25px;
             letter-spacing: -0.5px;
+            color: var(--text-main);
         }
         .stylised-text p {
             font-size: 1.1rem;
@@ -74,8 +76,9 @@
             color: var(--text-sub);
             margin-bottom: 20px;
         }
+        .stylised-text p:last-child { margin-bottom: 0; }
 
-        /* --- PAGE 3: CONTACT (Centered) --- */
+        /* --- PAGE 3: CONTACT --- */
         #contact { 
             background-color: var(--bg-light);
             justify-content: center; 
@@ -88,8 +91,7 @@
             width: 100%; 
             max-width: 550px; 
             border: 1px solid #eee;
-            margin: 0 auto;
-            margin-top: -20px;
+            margin: -20px auto 0 auto; /* Added your optical centering offset */
         }
         
         /* --- NAVIGATION LINKS --- */
@@ -109,12 +111,31 @@
             transition: opacity 0.3s;
         }
 
-        /* Your custom 20px positioning */
+        /* Fixed at your 20px from bottom setting */
         .scroll-hint { bottom: 20px; color: #aaa; animation: bounce 2s infinite; }
         .scroll-hint.brand { color: var(--brand-green); }
         .back-to-top { bottom: 20px; color: var(--brand-green); }
 
         .nav-link:hover { opacity: 0.7; }
+
+        /* --- UK COMPLIANCE FOOTER --- */
+        .site-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10;
+            text-align: left;
+        }
+        .footer-link, .footer-legal {
+            font-size: 0.65rem;
+            color: #aaa;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            line-height: 1.4;
+        }
+        .footer-link:hover { color: var(--brand-green); text-decoration: underline; }
 
         /* --- FORM STYLES --- */
         h2.form-title { margin-bottom: 25px; text-align: center; font-size: 1.8rem; }
@@ -149,26 +170,36 @@
         @media (max-width: 600px) {
             #hero { 
                 justify-content: flex-start; 
-                padding-top: 15vh; /* Moves logo up on mobile */
+                padding-top: 15vh; /* Lifts logo on mobile */
             }
             .logo { margin-top: 0; } 
             
-            /* Center Page 3 even on mobile */
             #contact { justify-content: center; }
-
-            .scroll-hint { bottom: 20px; } 
 
             .stylised-text h2 { font-size: 1.5rem; }
             .stylised-text p { font-size: 1.0rem; line-height: 1.6; }
             .content-border { padding: 40px 20px; }
-            .form-container { padding: 30px 20px; width: 95%; }
+            
+            .form-container { 
+                padding: 30px 20px; 
+                width: 95%; 
+                margin-top: -10px; /* Reduced offset for mobile to prevent overlap */
+            }
+
+            .site-footer {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 10px;
+                text-align: center;
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
     <section id="hero">
-        <img src="https://www.harehouseconsulting.com/christmas_logo.png" alt="Hare House Consulting" class="logo">
+        <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting" class="logo">
         <a href="#services" class="nav-link scroll-hint js-scroll">Our Services ↓</a>
     </section>
 
@@ -230,12 +261,17 @@
                 <button class="reset-btn" style="margin-top: 25px;" onclick="resetForm()">Send Another Message</button>
             </div>
         </div>
+
+        <div class="site-footer">
+            <span class="footer-legal">Hare House Consulting Ltd • No. 12345678</span>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        </div>
         
         <a href="#hero" class="nav-link back-to-top js-scroll">↑ Back to Top</a>
     </section>
 
     <script>
-        // Smooth Scroll Logic
+        // --- Smooth Scrolling Logic ---
         document.querySelectorAll('.js-scroll').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -244,31 +280,47 @@
             });
         });
 
-        // Form Submission Logic
+        // --- Form Submission Logic ---
         const form = document.getElementById('contact-form');
         const btn = document.getElementById('submit-btn');
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const hcaptchaResponse = hcaptcha.getResponse();
-            if (!hcaptchaResponse) { alert("Please complete the hCaptcha."); return; }
+            if (!hcaptchaResponse) { 
+                alert("Please complete the hCaptcha to prove you are human."); 
+                return; 
+            }
+
             btn.innerHTML = "Sending...";
             btn.disabled = true;
+
             const formData = new FormData(form);
             const object = Object.fromEntries(formData);
             object["h-captcha-response"] = hcaptchaResponse;
+
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(object)
-            }).then(res => {
+            }).then(async (res) => {
                 if (res.status === 200) {
                     document.getElementById('form-box').style.display = "none";
                     document.getElementById('result').style.display = "block";
+                } else {
+                    alert("Something went wrong. Please try again.");
+                    btn.disabled = false;
+                    btn.innerHTML = "Send Message";
                 }
+            }).catch(error => {
+                console.log(error);
+                alert("Form submission failed. Check your internet connection.");
+                btn.disabled = false;
+                btn.innerHTML = "Send Message";
             });
         });
 
+        // --- Reset Form Functionality ---
         function resetForm() {
             form.reset();
             hcaptcha.reset();
