@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hare House Consulting | Software Engineering Review</title>
+    <title>Hare House Consulting | Engineering Audit & Review</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,83 +14,88 @@
                 <img src="hare-logo.png" alt="Hare House Consulting">
             </a>
             <nav class="nav-links">
-                <a href="#services">Our Services ↓</a>
-            </nav>
+                <a href="#services">Services</a>
+                <a href="#methodology">Methodology</a>
+                <a href="#contact" class="nav-cta">Get In Touch ↓</a>
+            </div>
         </div>
     </header>
 
-    <section id="hero" class="hero-fullscreen">
-        <div class="container hero-content">
-            <span class="sub-headline">Audit • Strategy • Scale</span>
-            <h1>Software Engineering Review</h1>
-            
-            <div class="hero-description">
-                <p>We provide expert-led technical audits and engineering reviews tailored for high-growth firms and established enterprises. Our mission is to identify hidden technical debt, streamline development lifecycles, and ensure your architecture is built to scale.</p>
-                <p>From deep-code analysis to assessing engineering culture and workflows, we offer actionable insights that align your technical roadmap with your commercial ambitions.</p>
-            </div>
-
-            <div class="hero-actions">
-                <a href="#contact" class="btn-primary">Contact Us ↓</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="section-title">Diagnostic Audit Suites</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <h3>Engineering Velocity Audit</h3>
-                    <p>Analysis of "Growth Friction." We investigate why delivery slows as headcount grows, focusing on communication and CI/CD bottlenecks.</p>
+    <main>
+        <section id="hero" class="hero-fullscreen">
+            <div class="container hero-content">
+                <span class="sub-headline">Technical Due Diligence • Engineering Strategy</span>
+                <h1>Software Engineering Review</h1>
+                <div class="hero-description">
+                    <p>We provide expert-led technical audits for high-growth firms. We identify hidden technical debt, streamline development lifecycles, and ensure your architecture is built to scale.</p>
                 </div>
-                <div class="service-card">
-                    <h3>Architectural Integrity</h3>
-                    <p>Clinical debt assessment. We identify structural risks in your foundation before they impact your 12-month growth targets.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Investment Due Diligence</h3>
-                    <p>Independent technical risk assessment for M&A and Private Equity. We provide the "Outside View" on code quality and IP safety.</p>
-                </div>
+                <a href="#services" class="scroll-indicator">Explore Services ↓</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-container">
-                <h2 class="section-title">Get In Touch</h2>
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="Your Name" required>
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2 class="section-title">Diagnostic Audit Suites</h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <span class="card-number">01</span>
+                        <h3>Engineering Velocity</h3>
+                        <p>Analysis of "Growth Friction." We investigate why delivery slows as headcount grows, focusing on communication silos and CI/CD bottlenecks.</p>
                     </div>
-                    <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" placeholder="email@company.com" required>
+                    <div class="service-card">
+                        <span class="card-number">02</span>
+                        <h3>Architectural Integrity</h3>
+                        <p>A clinical look at your foundation. We pinpoint scalability risks and prioritize technical debt before it impacts your growth targets.</p>
                     </div>
-                    <div class="form-group">
-                        <label>Reason for Contact</label>
+                    <div class="service-card">
+                        <span class="card-number">03</span>
+                        <h3>M&A Due Diligence</h3>
+                        <p>Independent risk assessment for investors. We provide the "Outside View" on code quality, security, and IP safety during acquisitions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="methodology" class="methodology-section">
+            <div class="container">
+                <h2 class="section-title">The 14-Day Diagnostic</h2>
+                <p class="section-intro">Our process is surgical, objective, and designed to minimize disruption to your engineering team.</p>
+                
+                
+
+                <div class="process-steps">
+                    <div class="step"><strong>1. Discovery</strong><br>Codebase access & data gathering.</div>
+                    <div class="step"><strong>2. Deep Dive</strong><br>Stakeholder interviews & analysis.</div>
+                    <div class="step"><strong>3. Synthesis</strong><br>Risk rating & roadmap creation.</div>
+                    <div class="step"><strong>4. Briefing</strong><br>Executive summary & presentation.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-box">
+                    <h2>Ready to see the "Black Box" clearly?</h2>
+                    <p>Schedule a 15-minute introductory call to discuss your engineering health.</p>
+                    <form id="contact-form">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
                         <select>
                             <option>Engineering Review</option>
                             <option>Technical Audit</option>
-                            <option>Scaling Strategy</option>
-                            <option>Other</option>
+                            <option>M&A Due Diligence</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label>How can we help?</label>
-                        <textarea rows="5" placeholder="Briefly describe your current technical challenges..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
-                </form>
+                        <textarea rows="4" placeholder="Briefly describe your current technical challenges..."></textarea>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer class="main-footer">
         <div class="container">
-            <p>Hare House Consulting Ltd • No. 15830381</p>
-            <p><a href="#">Privacy Policy</a> • <a href="#hero">↑ Back to Top</a></p>
+            <p>Hare House Consulting Ltd • Registered in England & Wales</p>
         </div>
     </footer>
 
@@ -98,12 +103,9 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
-
 </body>
 </html>
