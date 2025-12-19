@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Hare House Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #0D2E27;
+            --text-main: #1a1a1a;
+            --text-sub: #444;
+            --bg-light: #fcfcfc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #fff; 
+            color: var(--text-main); 
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo-small {
+            max-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        /* Matches Page 2 Style */
+        .policy-card {
+            border: 3px solid var(--brand-green);
+            border-radius: 24px;
+            padding: 40px;
+            background: #fff;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--brand-green);
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin: 30px 0 15px 0;
+            color: var(--brand-green);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        p, li {
+            font-size: 1rem;
+            color: var(--text-sub);
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            text-decoration: none;
+            color: var(--brand-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 600px) {
+            .policy-card { padding: 25px; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <a href="index.html">
+                <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting" class="logo-small">
+            </a>
+        </header>
+
+        <main class="policy-card">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last Updated: December 2025</p>
+
+            <p>Hare House Consulting ("we", "our", or "us") is committed to protecting and respecting your privacy. This policy explains how we process personal data collected via our website in accordance with the UK General Data Protection Regulation (UK GDPR).</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>When you use our contact form, we collect the information you provide to us, which typically includes:</p>
+            <ul>
+                <li>Full Name</li>
+                <li>Email Address</li>
+                <li>Reason for Contact</li>
+                <li>Any personal information contained within your message</li>
+            </ul>
+
+            <h2>2. How We Use Your Information</h2>
+            <p>We use this information solely to:</p>
+            <ul>
+                <li>Respond to your enquiries regarding our engineering reviews and consultancy services.</li>
+                <li>Provide the services requested by you.</li>
+                <li>Maintain our business records.</li>
+            </ul>
+
+            <h2>3. Third-Party Services</h2>
+            <p>To ensure our website remains secure and functional, we use the following third-party processors:</p>
+            <ul>
+                <li><strong>Web3Forms:</strong> Used to deliver your contact form messages to our email inbox securely.</li>
+                <li><strong>hCaptcha:</strong> Used to prevent automated spam. This service may collect hardware and software information to verify you are a human.</li>
+            </ul>
+
+            <h2>4. Data Retention</h2>
+            <p>We only keep your personal data for as long as necessary to fulfil the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
+
+            <h2>5. Your Rights</h2>
+            <p>Under the UK GDPR, you have the right to access, rectify, or erase your personal data held by us. If you wish to exercise any of these rights, please contact us via the main website contact form.</p>
+
+            <h2>6. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please reach out to us through our primary contact channel.</p>
+        </main>
+
+        <center>
+            <a href="index.html" class="back-link">← Back to Main Site</a>
+        </center>
+    </div>
+
+</body>
+</html>
