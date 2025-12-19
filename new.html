@@ -5,72 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hare House Consulting | Engineering Audit & Strategy</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header>
-        <nav>
-            <div class="logo">
-                <img src="logo.png" alt="Hare House Consulting Logo">
-                <span>HARE HOUSE</span>
-            </div>
-            <ul>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#approach">The Outside View</a></li>
-                <li><a href="#case-studies">Results</a></li>
-                <li><a href="contact.html" class="cta-nav">Book a Diagnostic</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="hare-logo.png" alt="Hare House">
+                    HARE HOUSE
+                </a>
+                <div class="nav-links">
+                    <a href="#services">Services</a>
+                    <a href="#philosophy">The Outside View</a>
+                    <a href="#contact" class="highlight">Book a Diagnostic &rarr;</a>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Scaling your engineering team shouldn't slow you down.</h1>
-            <p>Specialized audits to identify growth friction, eliminate technical debt, and restore engineering velocity.</p>
-            <div class="hero-btns">
-                <a href="#services" class="btn primary">View Audit Suites</a>
-                <a href="contact.html" class="btn secondary">Book Intro Call</a>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <span class="section-label">Engineering Audit & Strategy</span>
+                <h1>Scaling shouldn't feel like <span class="highlight">slowing down.</span></h1>
+                <p>We provide specialized audits for scale-ups to identify growth friction, eliminate technical debt, and restore engineering velocity.</p>
+                <a href="#contact" class="btn-primary">Send Message</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Our Audit Suites</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <h3>Engineering Velocity Audit</h3>
-                    <p>Identify the "Human Pipeline" bottlenecks. We fix the communication and process taxes that slow teams down as they grow.</p>
-                    <a href="#">Learn More &rarr;</a>
-                </div>
-                <div class="service-card">
-                    <h3>Architectural Integrity</h3>
-                    <p>A clinical assessment of your technical debt. Ensure your foundation can support your next 100k users without collapsing.</p>
-                    <a href="#">Learn More &rarr;</a>
-                </div>
-                <div class="service-card">
-                    <h3>M&A Due Diligence</h3>
-                    <p>Objective technical risk assessment for investors and PE firms. We find the skeletons in the repository before you close.</p>
-                    <a href="#">Learn More &rarr;</a>
+        <section id="services" class="services-section">
+            <div class="container">
+                <span class="section-label">Audit Suites</span>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <h3>Engineering Velocity Audit</h3>
+                        <p>A deep dive into the "Human Pipeline." We identify the communication overhead and process debt that is stalling your feature delivery.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Architectural Integrity</h3>
+                        <p>A clinical look at your foundation. We pinpoint scalability risks and prioritize technical debt before it becomes an existential liability.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>M&A Due Diligence</h3>
+                        <p>Independent risk assessment for investors. We audit the health, security, and IP of engineering departments during acquisitions.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="approach" class="dark-section">
-        <div class="container">
-            <h2>The "Outside View" Philosophy</h2>
-            <p>Internal teams are often blind to the smoke in the engine room. We provide zero-bias, radical candor, and a clinical benchmark of what "Good" looks like at your stage of growth.</p>
-            <div class="stats">
-                <div class="stat-item"><span>14 Days</span><br>Diagnostic Delivery</div>
-                <div class="stat-item"><span>100%</span><br>Independent Bias</div>
-                <div class="stat-item"><span>ROI</span><br>Focused Reports</div>
+        <section id="philosophy" class="philosophy">
+            <div class="container">
+                <h2>The "Outside View"</h2>
+                <p>Internal teams are often too close to the code to see the structural flaws. We provide zero-bias, radical candor, and an industry-standard benchmark to tell you exactly where your engineering health stands.</p>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-container">
+                    <span class="section-label" style="text-align: left;">Contact</span>
+                    <h2 style="margin-bottom: 32px;">Schedule your diagnostic briefing.</h2>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="e.g. Jane Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Work Email</label>
+                            <input type="email" placeholder="jane@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Team Size</label>
+                            <select>
+                                <option>10 - 50 Engineers</option>
+                                <option>50 - 150 Engineers</option>
+                                <option>150+ Engineers</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Challenge</label>
+                            <textarea rows="4" placeholder="Briefly describe the bottleneck you are facing..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2024 Hare House Consulting Ltd. | Registered in England & Wales</p>
+        <div class="container">
+            <p>&copy; 2024 Hare House Consulting. All rights reserved.</p>
+        </div>
     </footer>
+
 </body>
 </html>
