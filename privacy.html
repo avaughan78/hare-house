@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | Hare House Consulting</title>
+    <title>Hare House Consulting | Software Engineering Review</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
     <style>
         :root {
             --brand-green: #0D2E27;
@@ -15,144 +18,317 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
+
         body { 
             font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
             background: #fff; 
             color: var(--text-main); 
-            line-height: 1.6;
-            padding: 40px 20px;
+        }
+        
+        section { 
+            min-height: 100vh; 
+            min-height: 100dvh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-direction: column; 
+            padding: 40px 20px; 
+            position: relative; 
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        header {
+        /* --- PAGE 1: HERO --- */
+        #hero {
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
             text-align: center;
-            margin-bottom: 60px;
         }
 
-        .logo-small {
-            max-width: 250px;
-            margin-bottom: 20px;
+        .logo { 
+            max-width: 700px; 
+            width: 90%; 
+            height: auto;
+            margin-top: -5vh; /* Optical centering for desktop */
         }
-
-        /* Matches Page 2 Style */
-        .policy-card {
+        
+        /* --- PAGE 2: SERVICES --- */
+        #services { background-color: #fff; }
+        .content-border {
             border: 3px solid var(--brand-green);
             border-radius: 24px;
-            padding: 40px;
-            background: #fff;
+            padding: 50px 35px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
         }
-
-        h1 {
-            font-size: 2rem;
-            color: var(--brand-green);
-            margin-bottom: 10px;
+        .stylised-text h2 {
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
         }
-
-        .last-updated {
-            font-size: 0.8rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            font-size: 1.2rem;
-            margin: 30px 0 15px 0;
-            color: var(--brand-green);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-        }
-
-        p, li {
-            font-size: 1rem;
+        .stylised-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
             color: var(--text-sub);
-            margin-bottom: 15px;
-        }
-
-        ul {
-            margin-left: 20px;
             margin-bottom: 20px;
         }
+        .stylised-text p:last-child { margin-bottom: 0; }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 40px;
+        /* --- PAGE 3: CONTACT --- */
+        #contact { 
+            background-color: var(--bg-light);
+            justify-content: center; 
+        }
+        .form-container { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06); 
+            width: 100%; 
+            max-width: 550px; 
+            border: 1px solid #eee;
+            margin: -20px auto 0 auto; /* Added your optical centering offset */
+        }
+        
+        /* --- NAVIGATION LINKS --- */
+        .nav-link {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             text-decoration: none;
-            color: var(--brand-green);
+            text-transform: uppercase;
             font-weight: 600;
-            font-size: 0.9rem;
+            cursor: pointer;
+            text-align: center;
+            white-space: nowrap;
+            padding: 10px;
+            transition: opacity 0.3s;
+        }
+
+        /* Fixed at your 20px from bottom setting */
+        .scroll-hint { bottom: 20px; color: #aaa; animation: bounce 2s infinite; }
+        .scroll-hint.brand { color: var(--brand-green); }
+        .back-to-top { bottom: 20px; color: var(--brand-green); }
+
+        .nav-link:hover { opacity: 0.7; }
+
+        /* --- UK COMPLIANCE FOOTER --- */
+        .site-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10;
+            text-align: left;
+        }
+        .footer-link, .footer-legal {
+            font-size: 0.65rem;
+            color: #aaa;
+            text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: block;
+            line-height: 1.4;
+        }
+        .footer-link:hover { color: var(--brand-green); text-decoration: underline; }
+
+        /* --- FORM STYLES --- */
+        h2.form-title { margin-bottom: 25px; text-align: center; font-size: 1.8rem; }
+        .input-group { margin-bottom: 18px; text-align: left; }
+        label { display: block; margin-bottom: 6px; font-size: 0.9rem; font-weight: 500; }
+        
+        input, textarea, select { 
+            width: 100%; padding: 14px; border: 1.5px solid #ddd; 
+            border-radius: 8px; font-family: inherit; font-size: 1rem;
+        }
+        input:focus, textarea:focus, select:focus { border-color: var(--brand-green); outline: none; }
+        textarea { height: 100px; resize: none; }
+        
+        button, .reset-btn { 
+            background-color: var(--brand-green); 
+            color: white; border: none; padding: 18px; 
+            border-radius: 8px; cursor: pointer; width: 100%; 
+            font-weight: 600; font-size: 1rem;
+            transition: filter 0.2s, transform 0.1s;
+        }
+        button:hover { filter: brightness(1.3); }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
         }
 
-        .back-link:hover {
-            opacity: 0.7;
-        }
+        #result { display: none; text-align: center; padding: 40px 20px; }
 
+        /* --- MOBILE SPECIFIC OVERRIDES --- */
         @media (max-width: 600px) {
-            .policy-card { padding: 25px; }
-            h1 { font-size: 1.6rem; }
+            #hero { 
+                justify-content: flex-start; 
+                padding-top: 15vh; /* Lifts logo on mobile */
+            }
+            .logo { margin-top: 0; } 
+            
+            #contact { justify-content: center; }
+
+            .stylised-text h2 { font-size: 1.5rem; }
+            .stylised-text p { font-size: 1.0rem; line-height: 1.6; }
+            .content-border { padding: 40px 20px; }
+            
+            .form-container { 
+                padding: 30px 20px; 
+                width: 95%; 
+                margin-top: -10px; /* Reduced offset for mobile to prevent overlap */
+            }
+
+            .site-footer {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 10px;
+                text-align: center;
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <a href="index.html">
-                <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting" class="logo-small">
-            </a>
-        </header>
+    <section id="hero">
+        <img src="https://www.harehouseconsulting.com/logo.png" alt="Hare House Consulting" class="logo">
+        <a href="#services" class="nav-link scroll-hint js-scroll">Our Services ↓</a>
+    </section>
 
-        <main class="policy-card">
-            <h1>Privacy Policy</h1>
-            <p class="last-updated">Last Updated: December 2025</p>
+    <section id="services">
+        <div class="content-border">
+            <div class="stylised-text">
+                <h2>Software Engineering Review</h2>
+                <p>
+                    We provide expert-led technical audits and engineering reviews tailored for high-growth firms and established enterprises. Our mission is to identify hidden technical debt, streamline development lifecycles, and ensure your architecture is built to scale.
+                </p>
+                <p>
+                    From deep-code analysis to assessing engineering culture and workflows, we offer actionable insights that align your technical roadmap with your commercial ambitions.
+                </p>
+            </div>
+        </div>
+        <a href="#contact" class="nav-link scroll-hint brand js-scroll">Contact Us ↓</a>
+    </section>
 
-            <p>Hare House Consulting ("we", "our", or "us") is committed to protecting and respecting your privacy. This policy explains how we process personal data collected via our website in accordance with the UK General Data Protection Regulation (UK GDPR).</p>
+    <section id="contact">
+        <div class="form-container">
+            <div id="form-box">
+                <h2 class="form-title">Get In Touch</h2>
+                <form id="contact-form">
+                    <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
+                    
+                    <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="john@company.com">
+                    </div>
 
-            <h2>1. Information We Collect</h2>
-            <p>When you use our contact form, we collect the information you provide to us, which typically includes:</p>
-            <ul>
-                <li>Full Name</li>
-                <li>Email Address</li>
-                <li>Reason for Contact</li>
-                <li>Any personal information contained within your message</li>
-            </ul>
+                    <div class="input-group">
+                        <label for="subject">Reason for Contact</label>
+                        <select id="subject" name="subject">
+                            <option value="Engineering Review">Engineering Review</option>
+                            <option value="Technical Audit">Technical Audit</option>
+                            <option value="Scaling Strategy">Scaling Strategy</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
 
-            <h2>2. How We Use Your Information</h2>
-            <p>We use this information solely to:</p>
-            <ul>
-                <li>Respond to your enquiries regarding our engineering reviews and consultancy services.</li>
-                <li>Provide the services requested by you.</li>
-                <li>Maintain our business records.</li>
-            </ul>
+                    <div class="input-group">
+                        <label for="message">How can we help?</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
 
-            <h2>3. Third-Party Services</h2>
-            <p>To ensure our website remains secure and functional, we use the following third-party processors:</p>
-            <ul>
-                <li><strong>Web3Forms:</strong> Used to deliver your contact form messages to our email inbox securely.</li>
-                <li><strong>hCaptcha:</strong> Used to prevent automated spam. This service may collect hardware and software information to verify you are a human.</li>
-            </ul>
+                    <div class="h-captcha" data-sitekey="72f69652-993a-42d2-894c-633e97080c70"></div>
+                    <button type="submit" id="submit-btn">Send Message</button>
+                </form>
+            </div>
+            
+            <div id="result">
+                <h3 style="color: var(--brand-green); margin-bottom: 15px;">Message Sent</h3>
+                <p>Thank you for reaching out. We will get back to you shortly.</p>
+                <button class="reset-btn" style="margin-top: 25px;" onclick="resetForm()">Send Another Message</button>
+            </div>
+        </div>
 
-            <h2>4. Data Retention</h2>
-            <p>We only keep your personal data for as long as necessary to fulfil the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
+        <div class="site-footer">
+            <span class="footer-legal">Hare House Consulting Ltd • No. 12345678</span>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        </div>
+        
+        <a href="#hero" class="nav-link back-to-top js-scroll">↑ Back to Top</a>
+    </section>
 
-            <h2>5. Your Rights</h2>
-            <p>Under the UK GDPR, you have the right to access, rectify, or erase your personal data held by us. If you wish to exercise any of these rights, please contact us via the main website contact form.</p>
+    <script>
+        // --- Smooth Scrolling Logic ---
+        document.querySelectorAll('.js-scroll').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
 
-            <h2>6. Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy, please reach out to us through our primary contact channel.</p>
-        </main>
+        // --- Form Submission Logic ---
+        const form = document.getElementById('contact-form');
+        const btn = document.getElementById('submit-btn');
 
-        <center>
-            <a href="index.html" class="back-link">← Back to Main Site</a>
-        </center>
-    </div>
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const hcaptchaResponse = hcaptcha.getResponse();
+            if (!hcaptchaResponse) { 
+                alert("Please complete the hCaptcha to prove you are human."); 
+                return; 
+            }
 
+            btn.innerHTML = "Sending...";
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            object["h-captcha-response"] = hcaptchaResponse;
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(object)
+            }).then(async (res) => {
+                if (res.status === 200) {
+                    document.getElementById('form-box').style.display = "none";
+                    document.getElementById('result').style.display = "block";
+                } else {
+                    alert("Something went wrong. Please try again.");
+                    btn.disabled = false;
+                    btn.innerHTML = "Send Message";
+                }
+            }).catch(error => {
+                console.log(error);
+                alert("Form submission failed. Check your internet connection.");
+                btn.disabled = false;
+                btn.innerHTML = "Send Message";
+            });
+        });
+
+        // --- Reset Form Functionality ---
+        function resetForm() {
+            form.reset();
+            hcaptcha.reset();
+            document.getElementById('result').style.display = "none";
+            document.getElementById('form-box').style.display = "block";
+            btn.disabled = false;
+            btn.innerHTML = "Send Message";
+        }
+    </script>
 </body>
 </html>
