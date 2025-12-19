@@ -28,8 +28,8 @@
         }
         
         section { 
-            min-height: 100vh; /* Standard fallback */
-            min-height: 100dvh; /* Dynamic viewport height for 2025 browsers */
+            min-height: 100vh; 
+            min-height: 100dvh; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
@@ -38,18 +38,21 @@
             position: relative; 
         }
 
-        /* --- PAGE 1: HERO --- */
+        /* --- PAGE 1: HERO (RE-CENTRALISED FOR LAPTOP) --- */
         #hero {
             display: flex;
-            justify-content: flex-start; 
-            align-items: center;
-            padding-top: 20vh; /* Lifted logo */
+            justify-content: center; /* Centralises vertically on laptop */
+            align-items: center;     /* Centralises horizontally */
+            text-align: center;
         }
 
         .logo { 
             max-width: 700px; 
             width: 90%; 
             height: auto;
+            /* Subtly offset the logo up slightly so it feels optically centered 
+               even with the arrow at the bottom */
+            margin-top: -5vh; 
         }
         
         /* --- PAGE 2: SERVICES --- */
@@ -86,7 +89,7 @@
             border: 1px solid #eee;
         }
         
-        /* --- CENTRALIZED NAVIGATION LINKS --- */
+        /* --- NAVIGATION LINKS --- */
         .nav-link {
             position: absolute;
             left: 50%;
@@ -99,12 +102,11 @@
             cursor: pointer;
             text-align: center;
             white-space: nowrap;
-            padding: 15px; /* Larger hit area */
+            padding: 15px;
             transition: opacity 0.3s;
         }
 
-        /* Adjusted bottom position to stay above mobile browser bars */
-        .scroll-hint { bottom: 20px; color: #aaa; animation: bounce 2s infinite; }
+        .scroll-hint { bottom: 60px; color: #aaa; animation: bounce 2s infinite; }
         .scroll-hint.brand { color: var(--brand-green); }
         .back-to-top { bottom: 40px; color: var(--brand-green); }
 
@@ -139,12 +141,16 @@
 
         #result { display: none; text-align: center; padding: 40px 20px; }
 
+        /* --- MOBILE SPECIFIC OVERRIDES --- */
         @media (max-width: 600px) {
-            #hero { padding-top: 25vh; } 
-            .scroll-hint { bottom: 20px; } /* Even higher on mobile to ensure visibility */
+            #hero { 
+                justify-content: flex-start; /* Move up on mobile */
+                padding-top: 25vh; 
+            }
+            .logo { margin-top: 0; } /* Reset laptop offset */
+            .scroll-hint { bottom: 80px; } 
             .content-border { padding: 40px 20px; }
             .stylised-text h2 { font-size: 1.8rem; }
-            .logo { max-width: 85%; }
         }
     </style>
 </head>
@@ -176,17 +182,14 @@
                 <h2 class="form-title">Get In Touch</h2>
                 <form id="contact-form">
                     <input type="hidden" name="access_key" value="28176fed-4f3c-4833-9cdb-91281eae0655">
-                    
                     <div class="input-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" required placeholder="John Doe">
                     </div>
-                    
                     <div class="input-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" required placeholder="john@company.com">
                     </div>
-
                     <div class="input-group">
                         <label for="subject">Reason for Contact</label>
                         <select id="subject" name="subject">
@@ -196,29 +199,24 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
-
                     <div class="input-group">
                         <label for="message">How can we help?</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
-
                     <div class="h-captcha" data-sitekey="72f69652-993a-42d2-894c-633e97080c70"></div>
                     <button type="submit" id="submit-btn">Send Message</button>
                 </form>
             </div>
-            
             <div id="result">
                 <h3 style="color: var(--brand-green); margin-bottom: 15px;">Message Sent</h3>
                 <p>Thank you for reaching out. We will get back to you shortly.</p>
                 <button class="reset-btn" style="margin-top: 25px;" onclick="resetForm()">Send Another Message</button>
             </div>
         </div>
-        
         <a href="#hero" class="nav-link back-to-top js-scroll">↑ Back to Top</a>
     </section>
 
     <script>
-        // Smooth Scroll Logic
         document.querySelectorAll('.js-scroll').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -227,7 +225,6 @@
             });
         });
 
-        // Form Submission Logic
         const form = document.getElementById('contact-form');
         const btn = document.getElementById('submit-btn');
 
@@ -235,20 +232,16 @@
             e.preventDefault();
             const hcaptchaResponse = hcaptcha.getResponse();
             if (!hcaptchaResponse) { alert("Please complete the hCaptcha."); return; }
-
             btn.innerHTML = "Sending...";
             btn.disabled = true;
-
             const formData = new FormData(form);
             const object = Object.fromEntries(formData);
             object["h-captcha-response"] = hcaptchaResponse;
-
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(object)
-            })
-            .then(res => {
+            }).then(res => {
                 if (res.status === 200) {
                     document.getElementById('form-box').style.display = "none";
                     document.getElementById('result').style.display = "block";
